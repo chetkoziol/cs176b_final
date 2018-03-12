@@ -18,6 +18,7 @@
     <p>Connection speed:</p>
     <p id='mbps'>Download: ?</p>
     <p id='ping'>Ping: ?</p>
+    <p id = 'jitter'>Jitter: ?</p>
   </body> 
 </html>
 
@@ -105,10 +106,24 @@
     }
     // alert('Took ' + (end - start) + 'ms');
     var avg = 0;
-    for(var i = 0; i < ping_attempts; i++){
+    //avg ping
+    for(var i = 1; i < ping_attempts; i++){
       avg += times[i];
     }
-    document.getElementById("ping").innerHTML = "Ping: "+ avg/ping_attempts + 'ms';
+    avg = avg/ping_attempts;
+
+    //jitter
+    var jitter = 0;
+    for(var i = 1; i < ping_attempts; i++){
+      jitter += Math.abs((times[i] - avg));
+    }
+    jitter = jitter/ping_attempts;
+
+    console.log(times);
+
+    document.getElementById("ping").innerHTML = "Ping: "+ avg.toFixed(2) + 'ms';
+
+    document.getElementById("jitter").innerHTML = "Jitter: " + jitter.toFixed(2) + 'ms';
   }
 </script>
 
