@@ -17,6 +17,18 @@ app.get('/download', function(req, res){
   res.send(s);
 });
 
+app.get('/download1', function(req, res){
+  var s = getRandomString(5);
+  console.log('downloaded');
+  res.send(s);
+});
+
+app.get('/download2', function(req, res){
+  var s = getRandomString(10);
+  console.log('downloaded');
+  res.send(s);
+});
+
 app.post('/upload', function(req, res){
   console.log('posted');
   res.send('done');

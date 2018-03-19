@@ -7,158 +7,190 @@
       download
     </button>
 
-    <button onclick="ping()">
-      ping
-    </button>
-
     <button onclick="upload()">
       upload
     </button>
 
-    <p>Connection speed:</p>
-    <p id='mbps'>Download: ?</p>
+    <button onclick="ping()">
+      ping
+    </button>
+
+
+    <p>Connection speed</p>
+    <p id='download'>Download: ?</p>
     <p id='upload'>Upload: ?</p>
     <p id='ping'>Ping: ?</p>
-    <p id = 'jitter'>Jitter: ?</p>
+    <p id='jitter'>Jitter: ?</p>
   </body> 
 </html>
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
-  function byteCount(s) {
-      return encodeURI(s).split(/%..|./).length - 1;
-  }
+  
+    function byteCount(s) {
+        return encodeURI(s).split(/%..|./).length - 1;
+    };
 
-  function download(){
-    $.ajax({
-        url: 'http://169.231.64.106:3000/download',
-        method: 'GET',
-        start_time: new Date().getTime(),
-        complete: function(data) {
-          var string = data.responseText;
-          var time = (new Date().getTime()) - this.start_time;
-          // console.log(string);
-          // console.log(time);
-          var mbps = (byteCount(string) * 8) / (time*1000);
-          console.log('mbps: ' + mbps);
+    function getRandomString( sizeInMb ) {
+      var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+          iterations = sizeInMb * 1024 * 1024, //get byte count
+          result = '';
+      for( var index = 0; index < iterations; index++ ) {
+          result += chars.charAt( Math.floor( Math.random() * chars.length ) );
+      };     
+      return result;
+    };
+
+    function download(){
+        // jQuery(function($) {
+          var times = [];
+            $.ajax({
+                url: 'http://169.231.64.106:3000/download',
+                async: false,
+                method: 'GET',
+                start_time: new Date().getTime(),
+                complete: function(data) {
+                  var string = data.responseText;
+                  var time = (new Date().getTime()) - this.start_time;
+                  var speed = ((byteCount(string) * 8) / (time*1000)).toFixed(2);
+                  console.log('mbps: ' + speed);
+                  times.push(speed);
+                  // document.getElementById('download').innerHTML = "Download speed: " + speed + " Mbps";
+                }
+            });
+            $.ajax({
+                url: 'http://169.231.64.106:3000/download1',
+                async: false,
+                method: 'GET',
+                start_time: new Date().getTime(),
+                complete: function(data) {
+                  var string = data.responseText;
+                  var time = (new Date().getTime()) - this.start_time;
+                  var speed = ((byteCount(string) * 8) / (time*1000)).toFixed(2);
+                  times.push(speed);
+                  console.log('mbps: ' + speed);
+                  // document.getElementById('download').innerHTML = "Download speed: " + speed + " Mbps";
+                }
+            });
+            $.ajax({
+                url: 'http://169.231.64.106:3000/download2',
+                async: false,
+                method: 'GET',
+                start_time: new Date().getTime(),
+                complete: function(data) {
+                  var string = data.responseText;
+                  var time = (new Date().getTime()) - this.start_time;
+                  var speed = ((byteCount(string) * 8) / (time*1000)).toFixed(2);
+                  times.push(speed);
+                  console.log('mbps: ' + speed);
+                  // document.getElementById('download').innerHTML = "Download speed: " + speed + " Mbps";
+                }
+            });
+            // console.log(times);
+            var avg = 0;
+            for(var i =0; i < times.length; i++){
+              avg += parseInt(times[i]);
+            }
+            avg = (avg/3).toFixed(2);
+            document.getElementById('download').innerHTML = "Download speed: " + avg + " Mbps";
+
+        // });
+    };
+
+    function upload() {
+        // jQuery(function($) {
+          var times = [];
+          var size = 1;
+            var data = getRandomString(size);
+            var start_time = new Date().getTime();
+            $.ajax({
+                url: 'http://169.231.64.106:3000/upload',
+                async: false,
+                method: 'POST',
+                data: data,
+                complete: function(data) {
+                  var speed = (( size * 1024 / ( ( new Date() - start_time ) / 1000 ) )/1024).toFixed(2);
+                  times.push(speed);
+                  console.log("mbps " + speed);
+                  // document.getElementById('upload').innerHTML = "Upload speed: " + speed + " Mbps";
+                }
+            });
+            var size = 5;
+            var data = getRandomString(size);
+            var start_time = new Date().getTime();
+            $.ajax({
+                url: 'http://169.231.64.106:3000/upload',
+                async: false,
+                method: 'POST',
+                data: data,
+                complete: function(data) {
+                  var speed = (( size * 1024 / ( ( new Date() - start_time ) / 1000 ) )/1024).toFixed(2);
+                  times.push(speed);
+                  console.log("mbps " + speed);
+                  // document.getElementById('upload').innerHTML = "Upload speed: " + speed + " Mbps";
+                }
+            });
+            var size = 10;
+            var data = getRandomString(size);
+            var start_time = new Date().getTime();
+            $.ajax({
+                url: 'http://169.231.64.106:3000/upload',
+                async: false,
+                method: 'POST',
+                data: data,
+                complete: function(data) {
+                  var speed = (( size * 1024 / ( ( new Date() - start_time ) / 1000 ) )/1024).toFixed(2);
+                  times.push(speed);
+                  console.log("mbps " + speed);
+                  // document.getElementById('upload').innerHTML = "Upload speed: " + speed + " Mbps";
+                }
+            });
+
+            var avg = 0;
+            for(var i =0; i < times.length; i++){
+              avg += parseInt(times[i]);
+            }
+            avg = (avg/3).toFixed(2);
+            document.getElementById('upload').innerHTML = "Upload speed: " + avg + " Mbps";
+        // });
+    };
+
+    function ping(){
+        var times = [];
+        var ping_attempts = 10;
+        for(var i = 0; i < ping_attempts+1; i++){
+          var start = (new Date()).getTime();
+          var end;
+          // jQuery(function($) {
+              $.ajax({
+                  type:'GET',
+                  url: 'http://169.231.64.106:3000/ping',
+                  async: false,
+                  success : function() {
+                      end = (new Date()).getTime();
+                      times[i] = end-start;
+                  }
+              });
+          // });
         }
-    });
-  }
-</script>
 
+        var avg = 0;
+        // //avg ping
+        for(var i = 1; i < ping_attempts+1; i++){
+          avg += times[i];
+        }
+        var avg = avg/ping_attempts;
 
+        //jitter
+        var jitter = 0;
+        for(var i = 1; i < ping_attempts+1; i++){
+          jitter += Math.abs((times[i] - avg));
+        }
+        jitter = jitter/ping_attempts;
+        console.log('ping: ' + avg);
+        console.log('jitter: ' + jitter);
+        document.getElementById('ping').innerHTML = "Ping: " + avg.toFixed(2) + " ms";
+        document.getElementById('jitter').innerHTML = "Jitter: " + jitter.toFixed(2) + " ms";
 
-<!-- this code was based on this page -->
-<!-- https://stackoverflow.com/questions/5529718/how-to-detect-internet-speed-in-javascript -->
-<!-- this is the download speed test -->
-<!-- <script type="text/javascript">
-  // var imageAddr = "https://internetspeedtest176b.files.wordpress.com/2018/03/1929948.jpg?w=1600"; 
-  var imageAddr = "http://ipv4.download.thinkbroadband.com/5MB.zip";
-  // var imageAddr = 'http://192.168.0.23:4000/images/router.jpg';
-  var downloadSize = 65238; //bytes
-
-  function download() {
-      window.setTimeout(startDownload, 1);
-  };    
-
-  function startDownload() {
-      var start, end;
-      var download = new Image();
-      
-      start = (new Date()).getTime();
-      var cacheBuster = "?nnn=" + start;
-      download.src = imageAddr + cacheBuster;
-
-      download.onload = function () {
-          end = (new Date()).getTime();
-          var duration = (end - start) / 1000;
-          var bitsLoaded = downloadSize * 8;
-          var speedBps = (bitsLoaded / duration).toFixed(2);
-          var speedKbps = (speedBps / 1024).toFixed(2);
-          var speedMbps = (speedKbps / 1024).toFixed(2);
-
-          document.getElementById("mbps").innerHTML = "Download: " + speedMbps + " Mbps";
-      }
-      
-      download.onerror = function (err, msg) {
-          ShowProgressMessage("Invalid image, or error downloading");
-      }
-  }
-</script>
- -->
-
-
-<!-- this is the ping speed test -->
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
-<script>
-  function ping(){
-    var times = [];
-    var ping_attempts = 10;
-    for(var i = 0; i < ping_attempts+1; i++){
-      var start = (new Date()).getTime();
-      var end;
-      $.ajax({
-          type:'GET',
-          // url: 'https://wordpress.com/page/internetspeedtest176b.wordpress.com',
-          url: 'http://169.231.64.106:3000',
-          async: false,
-          success : function() {
-              end = (new Date()).getTime();
-          }
-      });
-      times[i] = end-start;
-    }
-    // alert('Took ' + (end - start) + 'ms');
-    var avg = 0;
-    //avg ping
-    for(var i = 1; i < ping_attempts+1; i++){
-      avg += times[i];
-    }
-    avg = avg/ping_attempts;
-
-    //jitter
-    var jitter = 0;
-    for(var i = 1; i < ping_attempts+1; i++){
-      jitter += Math.abs((times[i] - avg));
-    }
-    jitter = jitter/ping_attempts;
-
-    console.log(times);
-
-    document.getElementById("ping").innerHTML = "Ping: "+ avg.toFixed(2) + 'ms';
-
-    document.getElementById("jitter").innerHTML = "Jitter: " + jitter.toFixed(2) + 'ms';
-  }
-</script>
-
-
-<script type="text/javascript">      
-  function upload() {
-      var xhr = new XMLHttpRequest();
-      var url = 'upload?cache=' + Math.floor( Math.random() * 10000 );
-      var data = getRandomString(1); 
-      var startTime;
-      var speed = 0;
-
-      xhr.onreadystatechange = function ( event ) {
-          if( xhr.readyState == 4 ) {
-              speed = Math.round( 1024 / ( ( new Date() - startTime ) / 1000 ) );
-              console.log(speed);
-          };
-      };
-
-      xhr.open( 'POST', url, true );
-      startTime = new Date();
-      xhr.send( data );
-  };
-      
-      function getRandomString( sizeInMb ) {
-          var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-              iterations = sizeInMb * 1024 * 1024, //get byte count
-              result = '';
-          for( var index = 0; index < iterations; index++ ) {
-              result += chars.charAt( Math.floor( Math.random() * chars.length ) );
-          };     
-          return result;
-      };
+    };
 </script>
