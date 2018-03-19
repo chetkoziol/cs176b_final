@@ -1,0 +1,381 @@
+<!-- TODO 
+1. Update main page logo image file
+2. Replace services text with actual shit we want
+3. Get rid of unncessary pages
+-->
+
+<!DOCTYPE HTML>
+<html lang="en-US">
+    <head>
+        <title>CS 176B Project - Internet Speed Test</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="description" content="Template provided by Colorlib" />
+        <meta name="keywords" content="HTML, CSS, JavaScript, PHP" />
+        <meta name="author" content="Kurt Madland, Chet Koziol, & Trevor Hecht" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+        <link rel="shortcut icon" href="images/favicon.png" />
+        <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,700i,900|Montserrat:400,700|PT+Serif' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css"  href='css/clear.css' />
+        <link rel="stylesheet" type="text/css"  href='css/common.css' />
+        <link rel="stylesheet" type="text/css"  href='css/font-awesome.min.css' />
+        <link rel="stylesheet" type="text/css"  href='css/carouFredSel.css' />
+        <link rel="stylesheet" type="text/css"  href='css/prettyPhoto.css' />
+        <link rel="stylesheet" type="text/css"  href='css/sm-clean.css' />
+        <link rel="stylesheet" type="text/css"  href='style.css' />
+
+        <!--[if lt IE 9]>
+                <script src="js/html5.js"></script>
+        <![endif]-->
+
+    </head>
+    <body>
+
+        <!-- Preloader Gif -->
+        <table class="doc-loader">
+            <tr>
+                <td>
+                    <img src="images/ajax-document-loader.gif" alt="Loading..." />
+                </td>
+            </tr>
+        </table>
+
+        <!-- Menu -->
+        <div class="menu-wrapper center-relative">
+            <nav id="header-main-menu">
+                <div class="mob-menu">MENU</div>
+                <ul class="main-menu sm sm-clean">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#tests">Tests</a></li>
+                    <li><a href="#info">Information</a></li>
+                    <li><a href="#contact">Contact</a></li> 
+                </ul>
+            </nav>
+        </div>
+
+
+
+        <!-- Home -->
+
+        <div id="home" class="section intro-page">
+            <div class="block content-1170 center-relative center-text">
+                <img class="top-logo" src="demo-images/cslogo.png" alt="Boxus" />
+                <br>
+                <h1 class="big-title">The Gaucho Internet Speed Test<span></span></h1>
+                <p class="title-desc">A project to offer any user free and accurate internet speed testing as well as information about potential improvements.</p>
+            </div>
+        </div>
+
+
+        <!-- Tests -->
+
+        <div id="tests" class="section">
+            <div class="block content-1170 center-relative">
+                <div class="section-title-holder left">
+                    <div class="section-num">
+                        <span>01</span>
+                    </div>
+                    <h2 class="entry-title">ANALYSIS TESTS</h2>
+                </div>
+                <div class="section-content-holder right">
+                    <div class="content-wrapper">
+                        <script>
+                            var slider1_speed = "500";
+                            var slider1_auto = "false";
+                            var slider1_hover = "true";
+                        </script>
+                        <div class="image-slider-wrapper relative tests slider1">
+                            <a id="slider1_next" class="image_slider_next" href ="#"></a>
+
+                            <ul id="slider1" class="image-slider slides">
+                                <li>
+                                    <div class="tests-holder ">
+                                        <div class="tests-content-holder">
+                                            <div class="tests-title"></div>
+                                            <div class="tests-content">
+                                                Click the buttons below to instantly assess your device's network speeds!
+												<br><br><br />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tests-holder ">
+                                        <img src="demo-images/downloadlogo.png" alt="">
+                                        <div class="tests-content-holder">
+                                            <div class="tests-title">DOWNLOAD SPEED</div>
+                                            <div class="tests-content">
+                                                Click this button to test your download speed, a measure of how fast your device can retrieve data from remote servers.<br> <br />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tests-holder ">
+                                        <img src="demo-images/uploadlogo.png" alt="">
+                                        <div class="tests-content-holder">
+                                            <div class="tests-title">UPLOAD SPEED</div>
+                                            <div class="tests-content">
+                                                Click this button to test your upload speed, a measure of how fast your device can send data to other servers. <br> <br />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tests-holder ">
+                                        <img src="demo-images/latencylogo.png" alt="">
+                                        <div class="tests-content-holder">
+                                            <div class="tests-title">NETWORK LATENCY</div>
+                                            <div class="tests-content">
+                                                Click this button to test your network latency, or ping, the measured amount of time it takes your device to get a response after sending out a request. <br> <br />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class = "clear"></div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class='clear'></div>
+            </div>
+        </div>
+
+        <!-- Information -->
+        <div id="info" class="section">
+            <div class="block content-1170 center-relative">
+                <div class="section-title-holder left">
+                    <div class="section-num">
+                        <span>02</span>
+                    </div>
+                    <h2 class="entry-title">MORE INFORMATION</h2>
+                </div>
+                <div class="section-content-holder right">
+                    <div class="content-wrapper">
+                        <div class="content-title-holder">
+                            <p class="content-title">Now what?</p>
+                        </div>
+                        <div class="one_half ">
+                             So you've run our internet speed tests and you're probably wondering <strong>"what does it all mean?"</strong> Now we'll provide you with more information about the significance of each speed metric above and show you how your internet speeds stack up against average speeds. If your speeds don't compare well to the competition, don't worry, because later we'll let you know about what you can do to improve your speeds.
+                        </div>
+                        <div class="one_half last ">
+                        </div><div class="clear"></div>
+                        <br>
+                        <br>
+                    </div>
+
+                    <div class="full-width ">
+                        <script>
+                            var infoImage_speed = "500";
+                            var infoImage_auto = "false";
+                            var infoImage_hover = "true";
+                        </script>
+
+                        <script>
+                            var team1_speed = "500";
+                            var team1_auto = "false";
+                            var team1_hover = "true";
+                        </script>
+                        <div class="image-slider-wrapper relative team team1">
+                            <a id="team1_next" class="image_slider_next" href="#"></a>
+                            <div class="caroufredsel_wrapper">
+                                <ul id="team1" class="image-slider slides">
+                                    <li>
+                                        <div class="member-content-holder">
+                                            <h4 class="member-name">Download Speed</h4>
+                                            <div class="member-content">
+                                                Here we'll talk about what average download speeds look like, maybe show a little chart on the right there.<br>
+                                            </div>
+                                        </div>
+                                        <div class="member-image-holder">
+                                            <img src="demo-images/about_img_01.jpg" alt="">
+                                        </div>
+                                        <div class="clear"></div>
+                                    </li>
+
+                                    <li>
+                                        <div class="member-content-holder">
+                                            <h4 class="member-name">Upload Speed</h4>
+                                            <div class="member-content">
+                                                Here we'll talk about what average upload speeds look like, maybe show a little chart too.<br>
+                                            </div>
+                                        </div>
+                                        <div class="member-image-holder">
+                                            <img src="demo-images/about_img_02.jpg" alt="">
+                                        </div>
+                                        <div class="clear"></div>
+                                    </li>
+
+                                    <li>
+                                        <div class="member-content-holder">
+                                            <h4 class="member-name">Latency</h4>
+                                            <div class="member-content">
+                                                Here we'll talk about what average latency should be. Maybe another chart on the right. <br>
+                                            </div>
+                                        </div>
+                                        <div class="member-image-holder">
+                                            <img src="demo-images/about_img_03.jpg" alt="">
+                                        </div>
+                                        <div class="clear"></div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>   <!-- end full-width div -->
+
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+
+
+        <!-- News -->
+        <div id="news" class="section">
+            <div class="block content-1170 center-relative">
+                <div class="section-title-holder right">
+                    <div class="section-num">
+                        <span>
+                            04
+                        </span>
+                    </div>
+                    <h2 class="entry-title">STORIES</h2>
+                </div>
+                <div class="section-content-holder left">
+                    <div class="content-wrapper">
+                        <div class="blog-holder block center-relative">
+
+                            <article class="relative blog-item-holder center-relative">
+                                <div class="num">01</div>
+                                <div class="info">
+                                    <div class="author vcard ">Robert Williams</div>
+                                    <div class="cat-links">
+                                        <ul>
+                                            <li><a href="#">BRANDING</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <h3 class="entry-title">
+                                    <a href="#">Eiusmod tempor incididunt ut dolore magna labore eiusmod ipsum dolor</a>
+                                </h3>
+                                <div class="clear"></div>
+                            </article>
+
+                            <article class="relative blog-item-holder center-relative">
+                                <div class="num">02</div>
+                                <div class="info">
+                                    <div class="author vcard ">Jim Davis</div>
+                                    <div class="cat-links">
+                                        <ul>
+                                            <li><a href="#">TECH</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <h3 class="entry-title">
+                                    <a href="#">Incididunt ut dolore magna labore eiusmod lorem ipsum dolor sit</a>
+                                </h3>
+                                <div class="clear"></div>
+                            </article>
+
+                            <article class="relative blog-item-holder center-relative">
+                                <div class="num">03</div>
+                                <div class="info">
+                                    <div class="author vcard ">Ann Peterson</div>
+                                    <div class="cat-links">
+                                        <ul>
+                                            <li><a href="#">CRAFTING</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <h3 class="entry-title">
+                                    <a href="#">Labore eiusmod lorem ipsum dolor sit amet nunc labore incididunt ut dolore</a>
+                                </h3>
+                                <div class="clear"></div>
+                            </article>
+
+                            <article class="relative blog-item-holder center-relative">
+                                <div class="num">04</div>
+                                <div class="info">
+                                    <div class="author vcard ">Robert Williams</div>
+                                    <div class="cat-links">
+                                        <ul>
+                                            <li><a href="#">CRAFTING</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <h3 class="entry-title">
+                                    <a href="#">Dolor sit amet nunc labore incididunt ut dolore magna labore eiusmod</a>
+                                </h3>
+                            </article>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact -->
+        <div id="contact" class="section">
+            <div class="block content-1170 center-relative">
+                <div class="section-title-holder left">
+                    <div class="section-num">
+                        <span>
+                            07
+                        </span>
+                    </div>
+                    <h2 class="entry-title">Contact</h2>
+                </div>
+                <div class="section-content-holder right">
+                    <div class="content-wrapper">
+                        <div class="one_half ">
+                            <p>Consectetur adipisicing elit sed eiusmod tempor incididunt ut dolore magna labore eiusmod. Lorem ipsum dolor sit amet consectetur est adipisicing elit, sed do eiusmod tempor.</p>
+                            <br>
+                            <p><strong><span style="color: #e64b77;">Incididunt ut dolore</span></strong> magna labore eiusmod. Dolor sit amet consectetur est adipisicing elit, sed do eiusmod.</p>
+                        </div>
+                        <div class="one_half last">
+                            <div class="contact-form">
+                                <p><input id="name" type="text" name="your-name" placeholder="Name"></p>
+                                <p><input id="contact-email" type="email" name="your-email" placeholder="Email"></p>
+                                <p><input id="subject" type="text" name="your-subject" placeholder="Subject"></p>
+                                <p><textarea id="message" name="your-message" placeholder="Message"></textarea></p>
+                                <p><input type="submit" onClick="SendMail()" value="SEND"></p>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+
+        <footer>
+            <div class="footer content-1170 center-relative">
+                <ul>
+                    <li class="copyright-footer">
+                        © 2018 All rights reserved. | Boxus Template by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                    </li>
+                    <li class="social-footer">
+                        <a href="#"><span class="fa fa-twitter"></span></a>
+                        <a href="#"><span class="fa fa-behance"></span></a>
+                        <a href="#"><span class="fa fa-dribbble"></span></a>
+                        <a href="#"><span class="fa fa-facebook"></span></a>
+                        <a href="#"><span class="fa fa-rss"></span></a>
+                    </li>
+                </ul>
+            </div>
+        </footer>
+
+
+        <!--Load JavaScript-->
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type='text/javascript' src='js/jquery.sticky-kit.min.js'></script>
+        <script type='text/javascript' src='js/jquery.smartmenus.min.js'></script>
+        <script type='text/javascript' src='js/jquery.sticky.js'></script>
+        <script type='text/javascript' src='js/jquery.dryMenu.js'></script>
+        <script type='text/javascript' src='js/isotope.pkgd.js'></script>
+        <script type='text/javascript' src='js/jquery.carouFredSel-6.2.0-packed.js'></script>
+        <script type='text/javascript' src='js/jquery.mousewheel.min.js'></script>
+        <script type='text/javascript' src='js/jquery.touchSwipe.min.js'></script>
+        <script type='text/javascript' src='js/jquery.easing.1.3.js'></script>
+        <script type='text/javascript' src='js/imagesloaded.pkgd.js'></script>
+        <script type='text/javascript' src='js/jquery.prettyPhoto.js'></script>
+        <script type='text/javascript' src='js/main.js'></script>
+    </body>
+</html>
