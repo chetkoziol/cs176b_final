@@ -5,3 +5,5 @@ main.js contains all of the javascript code that handles the ajax requests to th
 
 To run this a device must being running the server, then you can open up index.html and use the site.
 node server.js //starts the server
+
+We also used a template for our index.html page, and included it in the folder, titled: index_original.html
