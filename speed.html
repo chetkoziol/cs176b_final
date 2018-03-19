@@ -11,12 +11,13 @@
       ping
     </button>
 
-    <button onclick="httpGet()">
+    <button onclick="upload()">
       upload
     </button>
 
     <p>Connection speed:</p>
     <p id='mbps'>Download: ?</p>
+    <p id='upload'>Upload: ?</p>
     <p id='ping'>Ping: ?</p>
     <p id = 'jitter'>Jitter: ?</p>
   </body> 
@@ -28,10 +29,9 @@
       return encodeURI(s).split(/%..|./).length - 1;
   }
 
-
-  function httpGet(){
+  function download(){
     $.ajax({
-        url: 'http://192.168.0.23:4000/download',
+        url: 'http://169.231.64.106:3000/download',
         method: 'GET',
         start_time: new Date().getTime(),
         complete: function(data) {
@@ -51,9 +51,10 @@
 <!-- this code was based on this page -->
 <!-- https://stackoverflow.com/questions/5529718/how-to-detect-internet-speed-in-javascript -->
 <!-- this is the download speed test -->
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   // var imageAddr = "https://internetspeedtest176b.files.wordpress.com/2018/03/1929948.jpg?w=1600"; 
-  var imageAddr = 'http://192.168.0.23:4000/images/router.jpg';
+  var imageAddr = "http://ipv4.download.thinkbroadband.com/5MB.zip";
+  // var imageAddr = 'http://192.168.0.23:4000/images/router.jpg';
   var downloadSize = 65238; //bytes
 
   function download() {
@@ -84,6 +85,8 @@
       }
   }
 </script>
+ -->
+
 
 <!-- this is the ping speed test -->
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
@@ -91,12 +94,13 @@
   function ping(){
     var times = [];
     var ping_attempts = 10;
-    for(var i = 0; i < ping_attempts; i++){
+    for(var i = 0; i < ping_attempts+1; i++){
       var start = (new Date()).getTime();
       var end;
       $.ajax({
           type:'GET',
-          url: 'https://wordpress.com/page/internetspeedtest176b.wordpress.com',
+          // url: 'https://wordpress.com/page/internetspeedtest176b.wordpress.com',
+          url: 'http://169.231.64.106:3000',
           async: false,
           success : function() {
               end = (new Date()).getTime();
@@ -107,14 +111,14 @@
     // alert('Took ' + (end - start) + 'ms');
     var avg = 0;
     //avg ping
-    for(var i = 1; i < ping_attempts; i++){
+    for(var i = 1; i < ping_attempts+1; i++){
       avg += times[i];
     }
     avg = avg/ping_attempts;
 
     //jitter
     var jitter = 0;
-    for(var i = 1; i < ping_attempts; i++){
+    for(var i = 1; i < ping_attempts+1; i++){
       jitter += Math.abs((times[i] - avg));
     }
     jitter = jitter/ping_attempts;
@@ -127,30 +131,34 @@
   }
 </script>
 
-<script type="text/javascript">
-  function upload(){
-    var http = new XMLHttpRequest();
-    var startTime, endTime;
-    var url = "https://wordpress.com/page/internetspeedtest176b.wordpress.com";
-    var myData = "d="; // the raw data you will send
-    for(var i = 0 ; i < 1022 ; i++) //if you want to send 1 kb (2 + 1022 bytes = 1024b = 1kb). change it the way you want
-    {
-        myData += "k"; // add one byte of data;
-    }
 
-    http.open("POST", url, true);
+<script type="text/javascript">      
+  function upload() {
+      var xhr = new XMLHttpRequest();
+      var url = 'upload?cache=' + Math.floor( Math.random() * 10000 );
+      var data = getRandomString(1); 
+      var startTime;
+      var speed = 0;
 
-    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    http.setRequestHeader("Content-length", myData.length);
-    http.setRequestHeader("Connection", "close");
+      xhr.onreadystatechange = function ( event ) {
+          if( xhr.readyState == 4 ) {
+              speed = Math.round( 1024 / ( ( new Date() - startTime ) / 1000 ) );
+              console.log(speed);
+          };
+      };
 
-    http.onreadystatechange = function() {
-        if(http.readyState == 4 && http.status == 200) {
-            endTime = (new Date()).getTime();
-            console.log(startTime - endTime);
-        }
-    }
-    startTime = (new Date()).getTime();
-    http.send(myData);
-  }
+      xhr.open( 'POST', url, true );
+      startTime = new Date();
+      xhr.send( data );
+  };
+      
+      function getRandomString( sizeInMb ) {
+          var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+              iterations = sizeInMb * 1024 * 1024, //get byte count
+              result = '';
+          for( var index = 0; index < iterations; index++ ) {
+              result += chars.charAt( Math.floor( Math.random() * chars.length ) );
+          };     
+          return result;
+      };
 </script>

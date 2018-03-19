@@ -11,7 +11,28 @@ app.get('/', function(req, res){
   res.sendFile(__dirname + '/speed.html');
 });
 
+app.get('/download', function(req, res){
+  var s = getRandomString(1);
+  console.log('downloaded');
+  res.send(s);
+});
+
+app.post('/upload', function(req, res){
+  console.log('posted');
+  res.send('done');
+});
+
 //tells server to listen on port 3000
 http.listen(3000, function(){
   console.log('listening on *:3000');
 });
+
+function getRandomString( sizeInMb ) {
+    var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+        iterations = sizeInMb * 1024 * 1024, //get byte count
+        result = '';
+    for( var index = 0; index < iterations; index++ ) {
+        result += chars.charAt( Math.floor( Math.random() * chars.length ) );
+    };     
+    return result;
+};
