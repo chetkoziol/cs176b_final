@@ -1,8 +1,7 @@
-We have 2 source code files. One is speed.html, which is the html page with all of the logic of the speed test.
-The other is server.js, which hosts the html page. 
-The server that we use to ping/download/uplaod files is here: https://internetspeedtest176b.wordpress.com/image-repository/
+We have 3 main files, server.js, index.html, and main.js.
+server.js hosts the web server that the html page will make requests to.
+index.html is the main html page where the user can run the speed tests and see extra information.
+main.js contains all of the javascript code that handles the ajax requests to the server, and calculates the appropriate speeds.
 
-To run this, you have to have node and the necessary dependecies installed
-
-node server.js //starts the server on port 3000 on your local IP
-Then you can go to IP:port to view the page, and run the download/ping tests
+To run this a device must being running the server, then you can open up index.html and use the site.
+node server.js //starts the server
