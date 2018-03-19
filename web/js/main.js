@@ -393,3 +393,92 @@ var SendMail = function () {
 
 
 };
+
+
+
+    function byteCount(s) {
+        return encodeURI(s).split(/%..|./).length - 1;
+    };
+
+    function getRandomString( sizeInMb ) {
+      var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+          iterations = sizeInMb * 1024 * 1024, //get byte count
+          result = '';
+      for( var index = 0; index < iterations; index++ ) {
+          result += chars.charAt( Math.floor( Math.random() * chars.length ) );
+      };     
+      return result;
+    };
+
+    function download(){
+        jQuery(function($) {
+            $.ajax({
+                url: 'http://169.231.64.106:3000/download',
+                method: 'GET',
+                start_time: new Date().getTime(),
+                complete: function(data) {
+                  var string = data.responseText;
+                  var time = (new Date().getTime()) - this.start_time;
+                  var speed = ((byteCount(string) * 8) / (time*1000)).toFixed(2);
+                  console.log('mbps: ' + speed);
+                  document.getElementById('download').innerHTML = "Download speed: " + speed + " Mbps";
+                }
+            });
+        });
+    };
+
+    function upload() {
+        jQuery(function($) {
+            var data = getRandomString(1);
+            var start_time = new Date().getTime();
+            $.ajax({
+                url: 'http://169.231.64.106:3000/upload',
+                method: 'POST',
+                data: data,
+                complete: function(data) {
+                  var speed = (( 1024 / ( ( new Date() - start_time ) / 1000 ) )/1024).toFixed(2);
+                  console.log("mbps " + speed);
+                  document.getElementById('upload').innerHTML = "Upload speed: " + speed + " Mbps";
+                }
+            });
+        });
+    };
+
+    function ping(){
+        var times = [];
+        var ping_attempts = 10;
+        for(var i = 0; i < ping_attempts+1; i++){
+          var start = (new Date()).getTime();
+          var end;
+          jQuery(function($) {
+              $.ajax({
+                  type:'GET',
+                  url: 'http://169.231.64.106:3000/ping',
+                  async: false,
+                  success : function() {
+                      end = (new Date()).getTime();
+                      times[i] = end-start;
+                  }
+              });
+          });
+        }
+
+        var avg = 0;
+        // //avg ping
+        for(var i = 1; i < ping_attempts+1; i++){
+          avg += times[i];
+        }
+        var avg = avg/ping_attempts;
+
+        //jitter
+        var jitter = 0;
+        for(var i = 1; i < ping_attempts+1; i++){
+          jitter += Math.abs((times[i] - avg));
+        }
+        jitter = jitter/ping_attempts;
+        console.log('ping: ' + avg);
+        console.log('jitter: ' + jitter);
+        document.getElementById('ping').innerHTML = "Ping: " + avg.toFixed(2) + " ms";
+        document.getElementById('jitter').innerHTML = "Jitter: " + jitter.toFixed(2) + " ms";
+
+    };

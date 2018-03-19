@@ -22,6 +22,11 @@ app.post('/upload', function(req, res){
   res.send('done');
 });
 
+app.get('/ping', function(req, res){
+  console.log('ping');
+  res.send('p');
+});
+
 //tells server to listen on port 3000
 http.listen(3000, function(){
   console.log('listening on *:3000');
