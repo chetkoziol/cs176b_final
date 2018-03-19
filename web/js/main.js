@@ -395,7 +395,7 @@ var SendMail = function () {
 };
 
 
-
+  
     function byteCount(s) {
         return encodeURI(s).split(/%..|./).length - 1;
     };
@@ -412,8 +412,10 @@ var SendMail = function () {
 
     function download(){
         jQuery(function($) {
+          var times = [];
             $.ajax({
                 url: 'http://169.231.64.106:3000/download',
+                async: false,
                 method: 'GET',
                 start_time: new Date().getTime(),
                 complete: function(data) {
@@ -421,26 +423,104 @@ var SendMail = function () {
                   var time = (new Date().getTime()) - this.start_time;
                   var speed = ((byteCount(string) * 8) / (time*1000)).toFixed(2);
                   console.log('mbps: ' + speed);
-                  document.getElementById('download').innerHTML = "Download speed: " + speed + " Mbps";
+                  times.push(speed);
+                  // document.getElementById('download').innerHTML = "Download speed: " + speed + " Mbps";
                 }
             });
+            $.ajax({
+                url: 'http://169.231.64.106:3000/download1',
+                async: false,
+                method: 'GET',
+                start_time: new Date().getTime(),
+                complete: function(data) {
+                  var string = data.responseText;
+                  var time = (new Date().getTime()) - this.start_time;
+                  var speed = ((byteCount(string) * 8) / (time*1000)).toFixed(2);
+                  times.push(speed);
+                  console.log('mbps: ' + speed);
+                  // document.getElementById('download').innerHTML = "Download speed: " + speed + " Mbps";
+                }
+            });
+            $.ajax({
+                url: 'http://169.231.64.106:3000/download2',
+                async: false,
+                method: 'GET',
+                start_time: new Date().getTime(),
+                complete: function(data) {
+                  var string = data.responseText;
+                  var time = (new Date().getTime()) - this.start_time;
+                  var speed = ((byteCount(string) * 8) / (time*1000)).toFixed(2);
+                  times.push(speed);
+                  console.log('mbps: ' + speed);
+                  // document.getElementById('download').innerHTML = "Download speed: " + speed + " Mbps";
+                }
+            });
+            // console.log(times);
+            var avg = 0;
+            for(var i =0; i < times.length; i++){
+              avg += parseInt(times[i]);
+            }
+            avg = (avg/3).toFixed(2);
+            document.getElementById('download').innerHTML = "Download speed: " + avg + " Mbps";
+
         });
     };
 
     function upload() {
         jQuery(function($) {
-            var data = getRandomString(1);
+          var times = [];
+          var size = 1;
+            var data = getRandomString(size);
             var start_time = new Date().getTime();
             $.ajax({
                 url: 'http://169.231.64.106:3000/upload',
+                async: false,
                 method: 'POST',
                 data: data,
                 complete: function(data) {
-                  var speed = (( 1024 / ( ( new Date() - start_time ) / 1000 ) )/1024).toFixed(2);
+                  var speed = (( size * 1024 / ( ( new Date() - start_time ) / 1000 ) )/1024).toFixed(2);
+                  times.push(speed);
                   console.log("mbps " + speed);
-                  document.getElementById('upload').innerHTML = "Upload speed: " + speed + " Mbps";
+                  // document.getElementById('upload').innerHTML = "Upload speed: " + speed + " Mbps";
                 }
             });
+            var size = 5;
+            var data = getRandomString(size);
+            var start_time = new Date().getTime();
+            $.ajax({
+                url: 'http://169.231.64.106:3000/upload',
+                async: false,
+                method: 'POST',
+                data: data,
+                complete: function(data) {
+                  var speed = (( size * 1024 / ( ( new Date() - start_time ) / 1000 ) )/1024).toFixed(2);
+                  times.push(speed);
+                  console.log("mbps " + speed);
+                  // document.getElementById('upload').innerHTML = "Upload speed: " + speed + " Mbps";
+                }
+            });
+            var size = 10;
+            var data = getRandomString(size);
+            var start_time = new Date().getTime();
+            $.ajax({
+                url: 'http://169.231.64.106:3000/upload',
+                async: false,
+                method: 'POST',
+                data: data,
+                complete: function(data) {
+                  var speed = (( size * 1024 / ( ( new Date() - start_time ) / 1000 ) )/1024).toFixed(2);
+                  times.push(speed);
+                  console.log("mbps " + speed);
+                  // document.getElementById('upload').innerHTML = "Upload speed: " + speed + " Mbps";
+                }
+            });
+
+            var avg = 0;
+            for(var i =0; i < times.length; i++){
+              avg += parseInt(times[i]);
+            }
+            avg = (avg/3).toFixed(2);
+            document.getElementById('upload').innerHTML = "Upload speed: " + avg + " Mbps";
         });
     };
 
